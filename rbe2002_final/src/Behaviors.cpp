@@ -7,7 +7,6 @@
 #include "IMU.h"
 
 //behaviors
-#include "Speed_controller.h"
 #include "Wall_following.h"
 #include "Position_estimation.h"
 
@@ -80,12 +79,13 @@ void Behaviors::Run(void)
     
     case DRIVE:
         if(DetectCollision){
+            robot.Straight(-25,2); //reverse when collided
             robot_state = COLLISION;
             robot.Stop();
         }
         else {
             robot_state = DRIVE;
-            robot.Straight(50, 50);
+            robot.Run(50, 50);
         }
         break;
 
