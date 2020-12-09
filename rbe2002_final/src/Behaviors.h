@@ -9,7 +9,7 @@ class Behaviors{
         //int threshold_pick_up = 1290;
         int threshold_pick_up = 1100;
         int data[3] = {0};
-        enum ROBOT_STATE {IDLE, DRIVE, COLLISION, TURN, WALLFOLLOW, RAMP};
+        enum ROBOT_STATE {IDLE, DRIVE, COLLISION, TURN, WALLFOLLOW};
         ROBOT_STATE robot_state = IDLE; //initial state: IDLE
          
     public:
@@ -17,6 +17,6 @@ class Behaviors{
         void Stop(void);
         void Run(void);
         boolean DetectCollision(void);
-        double lengthCourse = 0.3;
+        double lengthCourse = 0.92; 
 };
 #endif

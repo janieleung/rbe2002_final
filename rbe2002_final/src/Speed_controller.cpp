@@ -83,7 +83,7 @@ boolean SpeedController::MoveToPosition(float target_x, float target_y)
 boolean SpeedController::Turn(int degree, int direction)
 {
     motors.setEfforts(0, 0);
-    int turns = counts*(degree/180.0);
+    float turns = counts*degree;
     int count_turn = MagneticEncoder.ReadEncoderCountLeft();
 
     while(abs(abs(count_turn) - abs(MagneticEncoder.ReadEncoderCountLeft())) <= turns)

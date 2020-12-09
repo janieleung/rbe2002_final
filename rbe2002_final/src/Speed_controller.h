@@ -13,7 +13,7 @@ class SpeedController{
         float E_right = 0;
         float E_distance = 0; 
         float E_theta = 0;
-        int counts = 1450; //number of counts for a 180 degree turn; you will likely have to change this
+        float counts = 4.1; //number of counts for a 180 degree turn; you will likely have to change this
         float error_distance = 0;
     public:
         struct constrained_acceleration {

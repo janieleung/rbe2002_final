@@ -7,7 +7,6 @@
 
 IRsensor SharpIR;
 SonarSensor HCSR04;
-Position position;
 
 void WallFollowingController::Init(void)
 {
@@ -23,10 +22,8 @@ float WallFollowingController::Process(float target_distance)
 
   sumOFE_distance += e_distance;
 
-  float speed = constrain(Kp * e_distance + Kd * d_e, -50, 50);
+  float speed = constrain(Kp * e_distance + Kd * d_e, -40, 40);
   prev_e_distance = e_distance;
-
-  position.UpdatePose(speed, speed);
 
   return speed;
 }

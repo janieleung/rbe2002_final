@@ -79,11 +79,7 @@ void Behaviors::Run(void)
         break;
     
     case DRIVE:
-        if(buttonA.getSingleDebouncedRelease()){ //debugging
-            robot_state = IDLE; 
-            robot.Stop();           
-        } 
-        else if(DetectCollision){
+        if(DetectCollision){
             robot_state = COLLISION;
             robot.Stop();
         }
@@ -95,6 +91,7 @@ void Behaviors::Run(void)
 
     case COLLISION:
         if(buttonA.getSingleDebouncedRelease()){
+            delay(1000); //delay 1s after pressing button
             robot_state = TURN;
             robot.Stop();
         }
@@ -105,20 +102,23 @@ void Behaviors::Run(void)
         break;
     
     case TURN:
-        if(robot.Turn(90, 1)){
+        if(robot.Turn(90, 0)){
             robot_state = WALLFOLLOW;
             robot.Stop();
+            position.Stop(); //reset position to 0,0,0
         }
         break;
     
     case WALLFOLLOW:
-        if(position.ReadTheta() < -PI/2 && position.ReadX() > lengthCourse){ //lengthCourse = corner to end point
+        if(position.ReadY() < -0.92){ 
             robot_state = IDLE;
-            robot.Stop(); //hit the end of 10 cm
+            robot.Stop(); //stop when hit the end of 10 cm
         }
         else{
             robot_state = WALLFOLLOW;
-            wallFollow.Process(30); //maintain 30cm from wall
+            int speed = wallFollow.Process(28); //maintain 28cm from wall
+            robot.Run(50 + speed, 50 - speed);
+            position.UpdatePose(50 + speed, 50 - speed);
         }
         break;
     };
