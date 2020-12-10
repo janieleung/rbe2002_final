@@ -78,7 +78,7 @@ void Behaviors::Run(void)
         break;
     
     case DRIVE:
-        if(DetectCollision){
+        if(DetectCollision()){
             robot.Straight(-25,2); //reverse when collided
             robot_state = COLLISION;
             robot.Stop();
